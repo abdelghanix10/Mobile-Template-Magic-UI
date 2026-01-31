@@ -1,5 +1,6 @@
 import { Icons } from "@/components/icons";
 import { siteConfig } from "@/lib/config";
+import Link from "next/link";
 import {
   InstagramLogoIcon,
   LinkedInLogoIcon,
@@ -12,19 +13,8 @@ interface Icon {
 }
 
 const icons: Icon[] = [
-  { icon: <LinkedInLogoIcon />, url: "#" },
-  { icon: <InstagramLogoIcon />, url: "#" },
-  { icon: <TwitterLogoIcon />, url: "#" },
-];
-
-type Link = {
-  text: string;
-  url: string;
-};
-
-const links: Link[] = [
-  { text: "Pricing", url: "#" },
-  { text: "Contact", url: "#" },
+  { icon: <InstagramLogoIcon />, url: siteConfig.links.instagram },
+  { icon: <TwitterLogoIcon />, url: siteConfig.links.twitter },
 ];
 
 export function Footer() {
@@ -43,6 +33,8 @@ export function Footer() {
             <a
               key={index}
               href={icon.url}
+              target="_blank"
+              rel="noreferrer"
               className="flex h-5 w-5 items-center justify-center text-muted-foreground transition-all duration-100 ease-linear hover:text-foreground hover:underline hover:underline-offset-4"
             >
               {icon.icon}
@@ -52,17 +44,19 @@ export function Footer() {
       </div>
       <div className="flex flex-col justify-between gap-y-5 md:flex-row md:items-center">
         <ul className="flex flex-col gap-x-5 gap-y-2 text-muted-foreground md:flex-row md:items-center">
-          {links.map((link, index) => (
+          {siteConfig.footer[0].menu.map((link, index) => (
             <li
               key={index}
               className="text-[15px]/normal font-medium text-muted-foreground transition-all duration-100 ease-linear hover:text-foreground hover:underline hover:underline-offset-4"
             >
-              <a href={link.url}>{link.text}</a>
+              <Link href={link.href}>{link.text}</Link>
             </li>
           ))}
         </ul>
         <div className="flex items-center justify-between text-sm font-medium tracking-tight text-muted-foreground">
-          <p>All rights reserved.</p>
+          <p>
+            © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

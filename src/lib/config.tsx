@@ -27,6 +27,11 @@ export const siteConfig = {
     github: "https://github.com/calaiapp",
     instagram: "https://instagram.com/calaiapp",
   },
+  header: [
+    { href: "/#features", text: "Features" },
+    { href: "/pricing", text: "Pricing" },
+    { href: "/contact", text: "Contact" },
+  ],
   features: [
     {
       name: "AI-Powered Scheduling",
@@ -145,7 +150,7 @@ export const siteConfig = {
   pricing: [
     {
       name: "Basic",
-      href: "#",
+      href: "/get-started",
       price: "$0",
       period: "month",
       yearlyPrice: "$0",
@@ -161,7 +166,7 @@ export const siteConfig = {
     },
     {
       name: "Pro",
-      href: "#",
+      href: "/get-started",
       price: "$12",
       period: "month",
       yearlyPrice: "$120",
@@ -233,11 +238,11 @@ export const siteConfig = {
     {
       id: 1,
       menu: [
-        { href: "#", text: "Features" },
-        { href: "#", text: "Pricing" },
-        { href: "#", text: "About Us" },
-        { href: "#", text: "Blog" },
-        { href: "#", text: "Contact" },
+        { href: "/#features", text: "Features" },
+        { href: "/pricing", text: "Pricing" },
+        { href: "/#testimonials", text: "Testimonials" },
+        { href: "/#faq", text: "FAQ" },
+        { href: "/contact", text: "Contact" },
       ],
     },
   ],

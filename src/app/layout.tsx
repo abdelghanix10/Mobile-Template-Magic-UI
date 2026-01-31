@@ -1,4 +1,5 @@
 import { ThemeProvider } from "@/components/theme-provider";
+import { PageTransition } from "@/components/page-transition";
 import { siteConfig } from "@/lib/config";
 import { fontSans } from "@/lib/fonts";
 import { cn, constructMetadata } from "@/lib/utils";
@@ -35,7 +36,7 @@ export default function RootLayout({
           defaultTheme="light"
           enableSystem={false}
         >
-          {children}
+          <PageTransition>{children}</PageTransition>
         </ThemeProvider>
       </body>
     </html>

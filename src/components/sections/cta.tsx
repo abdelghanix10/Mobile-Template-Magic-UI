@@ -1,3 +1,5 @@
+"use client";
+
 import { Icons } from "@/components/icons";
 import { buttonVariants } from "@/components/ui/button";
 import Marquee from "@/components/ui/marquee";
@@ -5,6 +7,7 @@ import { siteConfig } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
 
 const reviews = [
   {
@@ -66,7 +69,7 @@ const ReviewCard = ({
         // light styles
         "border-gray-950/[.1] bg-gray-950/[.01] hover:bg-gray-950/[.05]",
         // dark styles
-        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]"
+        "dark:border-gray-50/[.1] dark:bg-gray-50/[.10] dark:hover:bg-gray-50/[.15]",
       )}
     >
       <div className="flex flex-row items-center gap-2">
@@ -87,7 +90,13 @@ export function CTA() {
   return (
     <section id="cta">
       <div className="py-14 container mx-auto px-4 max-w-[1000px] ">
-        <div className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] border p-10 py-14">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-[2rem] border p-10 py-14"
+        >
           <div className="absolute rotate-[35deg]">
             <Marquee pauseOnHover className="[--duration:20s]" repeat={3}>
               {firstRow.map((review) => (
@@ -144,10 +153,10 @@ export function CTA() {
             </h1>
             <p className="mt-2">{siteConfig.description}</p>
             <Link
-              href="#"
+              href="/get-started"
               className={cn(
                 buttonVariants({ variant: "default" }),
-                "h-8 text-white rounded-full group mt-4"
+                "h-8 text-white rounded-full group mt-4",
               )}
             >
               {siteConfig.cta}
@@ -155,7 +164,7 @@ export function CTA() {
             </Link>
           </div>
           <div className="absolute inset-x-0 bottom-0 h-full bg-gradient-to-b from-transparent to-white to-70% dark:to-black" />
-        </div>
+        </motion.div>
       </div>
     </section>
   );

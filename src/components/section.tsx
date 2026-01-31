@@ -18,7 +18,7 @@ interface SectionProps {
 const Section = forwardRef<HTMLElement, SectionProps>(
   (
     { id, title, subtitle, description, children, className, align },
-    forwardedRef
+    forwardedRef,
   ) => {
     const internalRef = useRef<HTMLElement>(null);
     const ref = forwardedRef || internalRef;
@@ -28,8 +28,8 @@ const Section = forwardRef<HTMLElement, SectionProps>(
       align === "left"
         ? "text-left"
         : align === "right"
-        ? "text-right"
-        : "text-center";
+          ? "text-right"
+          : "text-center";
 
     const { scrollYProgress } = useScroll({
       target: ref as React.RefObject<HTMLElement>,
@@ -44,15 +44,18 @@ const Section = forwardRef<HTMLElement, SectionProps>(
     });
 
     return (
-      <section id={id || sectionId} ref={ref}>
-        <div className={cn("sm:py-20 py-12", className)}>
+      <section id={id || sectionId} ref={ref} className="relative">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, ease: easeInOutCubic }}
+          className={cn("sm:py-20 py-12", className)}
+        >
           {(title || subtitle || description) && (
             <div className={cn(alignmentClass, "space-y-4 pb-10 mx-auto")}>
               {title && (
-                <motion.h2
-                  className="text-sm text-primary text-balance font-mono font-semibold tracking-wider uppercase"
-                  style={{ opacity, y }}
-                >
+                <motion.h2 className="text-sm text-primary text-balance font-mono font-semibold tracking-wider uppercase">
                   {title}
                 </motion.h2>
               )}
@@ -60,14 +63,13 @@ const Section = forwardRef<HTMLElement, SectionProps>(
               {subtitle && (
                 <motion.h3
                   className={cn(
-                    "mx-0 mt-4 max-w-lg text-5xl text-balance font-bold sm:max-w-none sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] tracking-tighter text-foreground lowercase",
-                    align === "center"
-                      ? "mx-auto"
-                      : align === "right"
+                    "mt-4 max-w-lg text-5xl text-balance font-bold sm:max-w-none sm:text-4xl md:text-5xl lg:text-6xl leading-[1.2] tracking-tighter text-foreground lowercase",
+                    align === "right"
                       ? "ml-auto"
-                      : ""
+                      : align === "left"
+                        ? "mr-auto"
+                        : "mx-auto",
                   )}
-                  style={{ opacity, y }}
                 >
                   {subtitle}
                 </motion.h3>
@@ -76,13 +78,12 @@ const Section = forwardRef<HTMLElement, SectionProps>(
                 <motion.p
                   className={cn(
                     "mt-6 text-lg leading-8 text-muted-foreground text-balance max-w-2xl",
-                    align === "center"
-                      ? "mx-auto"
-                      : align === "right"
+                    align === "right"
                       ? "ml-auto"
-                      : ""
+                      : align === "left"
+                        ? "mr-auto"
+                        : "mx-auto",
                   )}
-                  style={{ opacity, y }}
                 >
                   {description}
                 </motion.p>
@@ -90,10 +91,10 @@ const Section = forwardRef<HTMLElement, SectionProps>(
             </div>
           )}
           {children}
-        </div>
+        </motion.div>
       </section>
     );
-  }
+  },
 );
 
 Section.displayName = "Section";

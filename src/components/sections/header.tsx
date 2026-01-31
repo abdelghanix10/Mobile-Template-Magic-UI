@@ -61,7 +61,7 @@ export function Header() {
           }}
           className={cn("sticky top-0 z-50 p-0 bg-background/60 backdrop-blur")}
         >
-          <div className="flex justify-between items-center container mx-auto p-2">
+          <div className="flex justify-between items-center container mx-auto p-2 h-full">
             <Link
               href="/"
               title="brand-logo"
@@ -70,11 +70,22 @@ export function Header() {
               <Icons.logo className="w-auto" />
               <span className="font-bold text-xl">{siteConfig.name}</span>
             </Link>
+            <nav className="hidden lg:flex items-center gap-6 ml-auto mr-6">
+              {siteConfig.header.map((item) => (
+                <Link
+                  key={item.text}
+                  href={item.href}
+                  className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+                >
+                  {item.text}
+                </Link>
+              ))}
+            </nav>
             <div className="flex items-center space-x-1">
               <ThemeToggle />
               <div className="hidden lg:block">
                 <Link
-                  href="#"
+                  href="/get-started"
                   className={cn(
                     buttonVariants({ variant: "default" }),
                     "h-8 text-white rounded-full group",

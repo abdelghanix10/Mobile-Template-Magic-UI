@@ -36,10 +36,21 @@ export function MobileDrawer() {
               <span className="font-bold text-xl">{siteConfig.name}</span>
             </Link>
           </div>
+          <nav className="flex flex-col gap-4 mt-8 text-left">
+            {siteConfig.header.map((item) => (
+              <Link
+                key={item.text}
+                href={item.href}
+                className="text-lg font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                {item.text}
+              </Link>
+            ))}
+          </nav>
         </DrawerHeader>
         <DrawerFooter>
           <Link
-            href="#"
+            href="/get-started"
             className={cn(
               buttonVariants({ variant: "default" }),
               "text-white rounded-full group",

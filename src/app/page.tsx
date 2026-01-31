@@ -13,19 +13,21 @@ import { Testimonials } from "@/components/sections/testimonials";
 
 export default function Home() {
   return (
-    <main className="relative">
+    <>
       <Header />
-      <Hero />
-      <FeatureScroll />
-      <FeatureHighlight />
-      <BentoGrid />
-      <Benefits />
-      <Features />
-      <Testimonials />
-      <Pricing />
-      <FAQ />
-      <CTA />
+      <main className="relative">
+        <Hero />
+        <FeatureScroll />
+        <FeatureHighlight />
+        <BentoGrid />
+        <Benefits />
+        <Features />
+        <Testimonials />
+        <Pricing />
+        <FAQ />
+        <CTA />
+      </main>
       <Footer />
-    </main>
+    </>
   );
 }
