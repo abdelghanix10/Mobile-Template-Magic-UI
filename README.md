@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Mobile MagicUI Template
 
-## Getting Started
+A modern, responsive, and animated mobile-first landing page template built with Next.js 16, Tailwind CSS, and Framer Motion.
 
-First, run the development server:
+![Project Status](https://img.shields.io/badge/status-active-success.svg)
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+
+## 🚀 Features
+
+- **Next.js 16**: Utilizing the latest features of the React framework.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+- **Framer Motion**: Smooth, complex animations and page transitions.
+- **Radix UI**: Accessible, unstyled UI primitives.
+- **Dark Mode**: Built-in dark mode support using `next-themes`.
+- **Responsive Design**: Mobile-first approach, looking great on all devices.
+- **Components**:
+  - Hero Section
+  - Feature Highlights & Scrolling
+  - Bento Grid
+  - Pricing Tables
+  - Testimonials
+  - FAQ Accordion
+  - Contact Form
+  - Mobile Drawer Navigation
+
+## 🛠️ Tech Stack
+
+- [Next.js](https://nextjs.org/)
+- [React](https://reactjs.org/)
+- [Tailwind CSS](https://tailwindcss.com/)
+- [Framer Motion](https://www.framer.com/motion/)
+- [Lucide React](https://lucide.dev/)
+- [Vaul](https://vaul.emilkowal.ski/) (Drawer component)
+
+## 📦 Installation
+
+1. **Clone the repository:**
+
+   ```bash
+   git clone https://github.com/abdelghanix10/mobile-magicui.git
+   cd mobile-magicui
+   ```
+
+2. **Install dependencies:**
+
+   ```bash
+   npm install
+   # or
+   pnpm install
+   # or
+   yarn install
+   ```
+
+3. **Run the development server:**
+
+   ```bash
+   npm run dev
+   # or
+   pnpm dev
+   # or
+   yarn dev
+   ```
+
+4. **Open your browser:**
+   Open [http://localhost:3000](http://localhost:3000) to see the application.
+
+## 📂 Project Structure
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+src/
+├── app/                  # Next.js App Router pages
+│   ├── contact/          # Contact page
+│   ├── get-started/      # Get Started page
+│   ├── pricing/          # Pricing page
+│   ├── layout.tsx        # Root layout
+│   └── page.tsx          # Home page
+├── components/           # React components
+│   ├── sections/         # Landing page sections (Hero, Features, etc.)
+│   ├── ui/               # Reusable UI components (Button, Card, etc.)
+│   └── ...
+├── lib/                  # Utility functions and configuration
+│   ├── config.tsx        # Site configuration and data
+│   └── utils.ts          # Helper functions
+└── ...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🎨 Customization
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- **Site Config**: Update `src/lib/config.tsx` to change site name, description, links, features, and pricing data.
+- **Theming**: Modify `tailwind.config.ts` and `src/app/globals.css` to customize colors and fonts.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📄 License
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+This project is licensed under the MIT License.
