@@ -3,7 +3,8 @@
 import { easeInOutCubic } from "@/lib/animation";
 import { cn } from "@/lib/utils";
 import { motion, useScroll, useTransform } from "framer-motion";
-import React, { forwardRef, useRef } from "react";
+import { usePathname } from "next/navigation";
+import React, { forwardRef, useEffect, useRef } from "react";
 
 interface SectionProps {
   id?: string;
@@ -20,8 +21,7 @@ const Section = forwardRef<HTMLElement, SectionProps>(
     { id, title, subtitle, description, children, className, align },
     forwardedRef,
   ) => {
-    const internalRef = useRef<HTMLElement>(null);
-    const ref = forwardedRef || internalRef;
+    const internalRef = useRef<HTMLElement | null>(null);
 
     const sectionId = title ? title.toLowerCase().replace(/\s+/g, "-") : id;
     const alignmentClass =
@@ -31,8 +31,59 @@ const Section = forwardRef<HTMLElement, SectionProps>(
           ? "text-right"
           : "text-center";
 
+    const pathname = usePathname();
+    const finalId = id || sectionId;
+
+    useEffect(() => {
+      if (!finalId || pathname !== "/") return;
+
+      // Skip URL updates for 1 second after page load to prevent "jumping" issues
+      const isInitialLanded =
+        typeof window !== "undefined" && window.location.hash !== "";
+      let skipUpdate = isInitialLanded;
+
+      const timer = setTimeout(() => {
+        skipUpdate = false;
+      }, 1000);
+
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (skipUpdate) return;
+
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              const targetHash = finalId === "hero" ? "" : `#${finalId}`;
+              if (window.location.hash !== targetHash) {
+                const newUrl =
+                  targetHash === ""
+                    ? window.location.pathname
+                    : `${window.location.pathname}${targetHash}`;
+                window.history.replaceState(null, "", newUrl);
+              }
+            }
+          });
+        },
+        {
+          rootMargin: "-30% 0px -60% 0px",
+          threshold: 0,
+        },
+      );
+
+      const currentElement = internalRef.current;
+      if (currentElement) {
+        observer.observe(currentElement);
+      }
+
+      return () => {
+        clearTimeout(timer);
+        if (currentElement) {
+          observer.unobserve(currentElement);
+        }
+      };
+    }, [finalId, pathname]);
+
     const { scrollYProgress } = useScroll({
-      target: ref as React.RefObject<HTMLElement>,
+      target: internalRef,
       offset: ["start end", "end start"],
     });
 
@@ -44,7 +95,18 @@ const Section = forwardRef<HTMLElement, SectionProps>(
     });
 
     return (
-      <section id={id || sectionId} ref={ref} className="relative">
+      <section
+        id={id || sectionId}
+        ref={(node) => {
+          internalRef.current = node;
+          if (typeof forwardedRef === "function") {
+            forwardedRef(node);
+          } else if (forwardedRef) {
+            forwardedRef.current = node;
+          }
+        }}
+        className="relative"
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

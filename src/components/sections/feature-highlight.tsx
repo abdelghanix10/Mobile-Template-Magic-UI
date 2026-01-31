@@ -129,8 +129,8 @@ export function FeatureHighlight() {
   return (
     <Section
       id="feature-highlight"
-      title="Features"
-      subtitle="Powerful features"
+      title="Technology"
+      subtitle="The technology behind Cal AI"
       className="container px-10"
       ref={containerRef}
     >
